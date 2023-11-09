@@ -15,7 +15,6 @@ module.exports = {
       },
       screens: {
         'xs': '320px', 
-        'xxs': '160px', 
       },
       transitionTimingFunction: {
         'out-flex': 'cubic-bezier(0.05, 0.6, 0.4, 0.9)',
