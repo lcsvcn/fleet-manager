@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       colors: {
         'primary-black': '#1A232E',
-        'secondary-white': '#c7c7c7',
+        'secondary-white': '#C7C7C7',
       },
       screens: {
         'xs': '320px', 

@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "axios": "^1.6.1",
-    "framer-motion": "^7.6.7",
+    "framer-motion": "^10.16.4 ",
     "next": "13.0.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "rc-table": "^7.35.2",
+    "react-pure-modal": "^2.2.5",
+    "react-js-pagination": "^3.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

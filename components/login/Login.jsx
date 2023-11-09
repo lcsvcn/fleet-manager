@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import styles from '../styles';
-import { slideIn, staggerContainer } from '../utils/motion';
-import { StatusCodeLoginMessages, StatusCodeRecoveryMessages, StatusCodeRegisterMessages, LoginFormTypes } from '../constants';
-import { isValidEmail } from '../utils/validations';
+import styles from '../../styles';
+import { slideIn, staggerContainer } from '../../utils/motion';
+import { StatusCodeLoginMessages, StatusCodeRecoveryMessages, StatusCodeRegisterMessages, LoginFormTypes } from '../../constants';
+import { isValidEmail } from '../../utils/validations';
 
 const Login = () => {
   const [formType, setFormType] = useState(LoginFormTypes.LOGIN);
@@ -40,6 +40,12 @@ const Login = () => {
       }
     
       setError(StatusCodeLoginMessages[response.status]);
+
+      if (response.status == 200) {
+        setTimeout(() => {
+          window.location.replace('/dashboard');
+        }, 2000);
+      }
     } else {
         if(!email) {
             response = { status: 400 };
@@ -90,10 +96,10 @@ const Login = () => {
 
           <div className="w-full sm:h-[500px] xs:h-[500px]  h-[350px] relative">
             <form
+              id="login-form"
               onSubmit={handleSubmit}
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full xs:w-[200px] sm:w-[300px] lg:w-[400px] xl:w-[600px] z-[25]"
             >
-
                       
             {formType == LoginFormTypes.REGISTER  && (
               <div className="mb-4">
@@ -119,31 +125,30 @@ const Login = () => {
                 </div>
               </div>
             )}
-
                 
-              <div className="mb-4">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-                />
-              </div>
-                
-              {formType != LoginFormTypes.RECOVERY && <div className="mb-4">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-                />
-              </div>
-              }
-          
-                
-              {error && (
+            <div className="mb-4">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+              
+            {formType != LoginFormTypes.RECOVERY && <div className="mb-4">
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+            }
+        
+              
+            {error && (
               <div
                 className={`w-full flex justify-center items-center text-center ${error.color} mb-4 font-bold`}
                 style={{ height: '2rem' }}

@@ -52,6 +52,27 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+li.js-li {
+  display: inline-block;
+  padding: 7px;
+  font-size: 18px;
+}
+
+li.js-li.active {
+  color: white;
+  font-weight: 700;
+  background: purple;
+  border-radius: 6px;
+}
+
+ul.js-ul {
+  margin-top: 12px;
+  text-align: right;
+}
+.rc-table-custom table {
+  width: 100%;
+}
+
 .gradient-03 {
   position: absolute;
   width: 404px;
@@ -84,6 +105,7 @@
   );
 }
 
+
 .feedback-gradient {
   position: absolute;
   width: 200px;
@@ -94,6 +116,10 @@
   background: #8d39a3;
   filter: blur(175px);
 }
+
+.text-red-error { color: #FF0000; }
+
+.text-green-success { color: #04af70; }
 
 .footer-gradient {
   position: absolute;
