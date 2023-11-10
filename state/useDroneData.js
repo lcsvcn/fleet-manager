@@ -27,8 +27,11 @@ export function useDroneData(id) {
     console.log(newDrone);
     fetch(`${baseUrl}/fleet/${id}/drones`, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
       },
       body: JSON.stringify(newDrone),
     })

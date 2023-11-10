@@ -26,11 +26,13 @@ export function useFleetData() {
     const owner_email = localStorage.getItem("client_email");
 
     newFleet.owner_email = owner_email;
-    
+
     fetch(`${baseUrl}/fleets`, {
-      method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
       },
       body: JSON.stringify(newFleet),
     })
