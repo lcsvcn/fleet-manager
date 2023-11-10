@@ -34,7 +34,7 @@ const Footer = () => (
 
         <div className="flex items-center justify-between flex-wrap gap-4">
           <h4 className="font-extrabold text-[24px] text-white">
-            FLEET MANAGER
+            FLEET MANAGER CLIENT PORTAL
           </h4>
           <p className="font-normal text-[14px] text-white opacity-50">
             Copyright © 2023 Fleet Manager. All rights reserved.

@@ -30,7 +30,7 @@ const Navbar = () => (
         leading-[30.24px]
         text-white`
       }>
-        Fleet Manager
+        Fleet Manager Client Portal
       </h2>
     </div>
   </motion.nav>
