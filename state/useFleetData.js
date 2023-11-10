@@ -28,6 +28,7 @@ export function useFleetData() {
     newFleet.owner_email = owner_email;
 
     fetch(`${baseUrl}/fleets`, {
+      method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
