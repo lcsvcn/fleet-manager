@@ -1,7 +1,8 @@
 export const  StatusCodeLoginMessages = {
   200: { "message": "Successful login, loading dashboard...", "color": "text-green-success" },
   404: { "message": "Email or password field is incorrect", "color": "text-red-error" },
-  400: { "message":"Required field is missing", "color": "text-red-error" },
+  401: { "message": "password field is incorrect", "color": "text-red-error" },
+  400: { "message": "Required field is missing", "color": "text-red-error" },
   500: { "message":"Server is not responding", "color": "text-red-error" },
 };
 

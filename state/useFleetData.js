@@ -23,6 +23,10 @@ export function useFleetData() {
   }, []);
 
   const addFleet = (newFleet) => {
+    const owner_email = localStorage.getItem("client_email");
+
+    newFleet.owner_email = owner_email;
+    
     fetch(`${baseUrl}/fleets`, {
       method: 'POST',
       headers: {

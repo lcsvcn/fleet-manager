@@ -29,6 +29,7 @@ const DroneDashboard = ({id}) => {
       localStorage.removeItem("snackbarMessageFromDrone"); 
       setSnackbarMessage(null);
     };
+  
     return (
         <main className="p-6 sm:p-10 space-y-6">
       {snackbarMessage && (

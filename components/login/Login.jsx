@@ -4,7 +4,7 @@ import styles from '../../styles';
 import { slideIn, staggerContainer } from '../../utils/motion';
 import { StatusCodeLoginMessages, StatusCodeRecoveryMessages, StatusCodeRegisterMessages, LoginFormTypes } from '../../constants';
 import { isValidEmail } from '../../utils/validations';
-
+import {baseUrl} from '../../constants';
 const Login = () => {
   const [formType, setFormType] = useState(LoginFormTypes.LOGIN);
   const [email, setEmail] = useState('');
@@ -16,32 +16,53 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // this is where you would make the API call to your backend
-    // if(formType == LoginFormTypes.REGISTER ) { callRegisterEndpoint } else { callLoginEndpoint }
     var response = {};
     
     if (formType === LoginFormTypes.REGISTER) {
-      if(!email || !password || !firstName || !lastName) {
-        response = { status: 400 };
-      } else if (isValidEmail(email)) {
-        response = { status: 200 };
-      } else {
-        response = { status: 404 };
-      }
+      try {
+        const registerResponse = await fetch(`${baseUrl}/clients`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            client_email: email,
+            client_password: password,
+            first_name: firstName,
+            last_name: lastName,
+          }),
+        });
 
+        console.log('registerResponse', registerResponse);
+  
+        response = { status: registerResponse.status };
+      } catch (error) {
+        console.error('Error during registration API call:', error);
+        response = { status: 500 }; // Internal server error
+      }
+  
       setError(StatusCodeRegisterMessages[response.status]);
     } else if(formType === LoginFormTypes.LOGIN) {
-      if (email === 'test@gmail.com' && password === 'test') {
-        response = { status: 200 };
-      } else if (!email || !password) {
-        response = { status: 400 };
-      } else {
-        response = { status: 404 };
+      try {
+        const loginResponse = await fetch(`${baseUrl}/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ client_email: email, client_password: password }),
+        });
+        
+        console.log('loginResponse', loginResponse);
+        response = { status: loginResponse.status };
+      } catch (error) {
+        console.error('Error during login API call:', error);
+        response = { status: 500 }; // Internal server error
       }
     
       setError(StatusCodeLoginMessages[response.status]);
 
       if (response.status == 200) {
+        localStorage.setItem("client_email", email);
         setTimeout(() => {
           window.location.replace('/dashboard');
         }, 2000);
