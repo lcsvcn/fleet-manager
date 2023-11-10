@@ -41,7 +41,8 @@ export function useDroneData(id) {
           setDroneData([...droneData, data]);
         })
     }  catch (error) {
-        setError(error.message);
+      setError(error.message);
+      console.log(error.message);
     }
   };
 

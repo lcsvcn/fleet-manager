@@ -48,8 +48,9 @@ export function useFleetData() {
           setFleetData([...fleetData, data]);
         })
     } catch(error) {
-        setError(error.message);
-      }
+      setError(error.message);
+      console.log(error.message);
+    }
   };
 
   return { fleetData, addFleet, error };

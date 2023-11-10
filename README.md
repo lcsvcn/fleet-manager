@@ -56,10 +56,6 @@ The Fleet Manager Customer Portal depends on the Fleet Manager Backend. Make sur
 
 2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the app.
 
-### CORS Issues (Production)
-
-**Note:** The production version of this app may experience CORS (Cross-Origin Resource Sharing) issues, especially if the backend is hosted on a different domain. Make sure to configure the backend server's CORS settings to allow requests from your production domain.
-
 ## Configuration
 
 In the `/constants/index.js` file, you can configure the `baseUrl` for API requests. Make sure to set it to the appropriate value for your Fleet Manager Backend API.
