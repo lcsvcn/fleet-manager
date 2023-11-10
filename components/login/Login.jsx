@@ -40,7 +40,7 @@ const Login = () => {
         console.error('Error during registration API call:', error);
         response = { status: 500 }; // Internal server error
       }
-  
+      console.log('response status', response.status)
       setError(StatusCodeRegisterMessages[response.status]);
     } else if(formType === LoginFormTypes.LOGIN) {
       try {

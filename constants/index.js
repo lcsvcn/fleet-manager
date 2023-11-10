@@ -7,7 +7,7 @@ export const  StatusCodeLoginMessages = {
 };
 
 export const  StatusCodeRegisterMessages = {
-  200: { "message": "Successful register!", "color": "text-green-success" },
+  201: { "message": "Successful register!", "color": "text-green-success" },
   404: { "message": "Email field is incorrect", "color": "text-red-error" },
   400: { "message":"Required field is missing", "color": "text-red-error" },
   500: { "message":"Server is not responding", "color": "text-red-error" },
