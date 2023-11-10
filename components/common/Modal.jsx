@@ -6,8 +6,10 @@ import "react-pure-modal/dist/react-pure-modal.min.css";
 const Modal = ({title, addItem, options, modal, setModal}) => {
     const [data, setData] = useState({});
 
-    const handleSubmit = () => {
-        addItem(data);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await addItem(data);
+        setModal(false);
     }
 
     const handleInputChange = (index, e) => {
