@@ -42,3 +42,5 @@ export const socials = [
     url: '/facebook.svg',
   },
 ];
+
+export const baseUrl = "http://localhost:3100/api/v1";

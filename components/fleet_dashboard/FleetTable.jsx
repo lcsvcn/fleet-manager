@@ -2,7 +2,7 @@ import Table from 'rc-table';
 import React, { useState } from 'react';
 import Pagination from "react-js-pagination";
 
-const FleetTable = ({ fleetData, deleteFleet }) => {
+const FleetTable = ({ data }) => {
   const columns = [
         {
           title: 'Fleet Id',
@@ -51,17 +51,17 @@ const FleetTable = ({ fleetData, deleteFleet }) => {
         setActivePage(pageNumber)
       }
       const navigateToFleet = (fleetId) => {
-        const url = `/fleet/${fleetId}`;
+        const url = `/drone/${fleetId}`;
         window.location.href = url;
       };
 
     return (
         <>
-        <Table columns={columns} data={fleetData} rowKey={data => data.id}  className='bg-purple-700 p-4 w-full text-center text-white rc-table-custom font-semibold '/>
+        <Table columns={columns} data={data} rowKey={data => data.id}  className='bg-purple-700 p-4 w-full text-center text-white rc-table-custom font-semibold '/>
         <Pagination
           activePage={activePage}
           itemsCountPerPage={10}
-          totalItemsCount={fleetData.length}
+          totalItemsCount={data.length}
           pageRangeDisplayed={5}
           onChange={handlePageChange}
           nextPageText={'Next'}

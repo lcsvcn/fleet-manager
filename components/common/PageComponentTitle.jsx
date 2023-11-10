@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 
-const PageComponentTitle = ({modalTitle, addFleet, options, buttonTitle}) => {
+const PageComponentTitle = ({modalTitle, addItem, options, buttonTitle}) => {
     const [modal, setModal] = useState(false);
     
     return (<>
-        <Modal title={modalTitle} addFleet={addFleet} modal={modal} options={options} setModal={setModal} />
+        <Modal title={modalTitle} addItem={addItem} modal={modal} options={options} setModal={setModal} />
             <div className="flex justify-between">  
                 <button
                     className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"

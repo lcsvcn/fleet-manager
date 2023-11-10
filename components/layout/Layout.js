@@ -7,7 +7,6 @@ import Sidebar from "./Sidebar";
 const Layout = ({children, title="Title"}) => {
   const [mobileNavsidebar, setMobileNavsidebar] = useState(false);
      
-
   return (
     <Fragment>
       

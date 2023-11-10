@@ -1,11 +1,11 @@
 "use client"
-import { Footer, Navbar, Dashboard} from '../../components';
+import { Footer, Navbar, FleetDashboard} from '../../components';
 
 
 const Page = () => (
   <div className="bg-primary-black overflow-hidden">
     <Navbar />
-    <Dashboard />
+    <FleetDashboard />
     <Footer />
   </div>
 );

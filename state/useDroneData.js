@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { baseUrl } from '../constants';
 
-export function useFleetData() {
-  const [fleetData, setFleetData] = useState([]);
+export function useDroneData(id) {
+  const [droneData, setDroneData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${baseUrl}/fleets`)
+    console.log(`${baseUrl}/fleet/${id}/drones`);
+    fetch(`${baseUrl}/fleet/${id}/drones`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -14,36 +15,37 @@ export function useFleetData() {
         return response.json();
       })
       .then((data) => {
-        setFleetData(data);
+        setDroneData(data);
       })
       .catch((error) => {
         setError(error.message);
-        console.error('Error fetching fleet data:', error);
+        console.error('Error fetching drone data:', error);
       });
   }, []);
 
-  const addFleet = (newFleet) => {
-    fetch(`${baseUrl}/fleets`, {
+  const addDrone = (newDrone) => {
+    console.log(newDrone);
+    fetch(`${baseUrl}/fleet/${id}/drones`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newFleet),
+      body: JSON.stringify(newDrone),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Error adding fleet (Status: ${response.status})`);
+          throw new Error(`Error adding drone (Status: ${response.status})`);
         }
         return response.json();
       })
       .then((data) => {
-        setFleetData([...fleetData, data]);
+        setDroneData([...droneData, data]);
       })
       .catch((error) => {
         setError(error.message);
-        console.error('Error adding fleet:', error);
+        console.error('Error adding drone:', error);
       });
   };
 
-  return { fleetData, addFleet, error };
+  return { droneData, addDrone, error };
 }

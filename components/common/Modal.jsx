@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
 
-const Modal = ({title, addFleet, options, modal, setModal}) => {
+const Modal = ({title, addItem, options, modal, setModal}) => {
     const [data, setData] = useState({});
 
     const handleSubmit = () => {
         console.log(data);
-        addFleet(data);
+        addItem(data);
     }
 
     const handleInputChange = (index, e) => {
@@ -35,13 +35,18 @@ const Modal = ({title, addFleet, options, modal, setModal}) => {
             </div>
             <form
                 id="modal-form"
-                className="space-y-4"
+                        className="space-y-4"
+                        
                 onSubmit={handleSubmit}
             >    
                 {options.map((item, index) => (
                     <div key={index} className="flex justify-between">
                         <label className="w-1/2 font-semibold pr-4">{item.title}</label>
-                        <input className="w-[75%] border-2 border-purple-600/50" onChange={(e) => handleInputChange(index, e)} type="text" />
+                        {(item.type === "number") ?
+                            <input type="text" id="numbersOnly" name="numbersOnly" pattern="\d*" title="Please enter numbers only." className="w-[75%] border-2 border-purple-600/50" onChange={(e) => handleInputChange(index, e)} required />
+                        :
+                            <input type="text" id="alphanumeric" name="alphanumeric" pattern="[A-Za-z0-9\s]*" title="Please enter alphanumeric characters only." className="w-[75%] border-2 border-purple-600/50" onChange={(e) => handleInputChange(index, e)} required />
+                        }
                     </div>
                 ))}
                     
