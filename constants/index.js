@@ -6,10 +6,11 @@ export const  StatusCodeLoginMessages = {
   500: { "message":"Server is not responding", "color": "text-red-error" },
 };
 
-export const  StatusCodeRegisterMessages = {
-  201: { "message": "Successful register!", "color": "text-green-success" },
+export const StatusCodeRegisterMessages = {
+  200: { "message": "Successful register!", "color": "text-green-success" },
   404: { "message": "Email field is incorrect", "color": "text-red-error" },
-  400: { "message":"Required field is missing", "color": "text-red-error" },
+  400: { "message": "Required field is missing", "color": "text-red-error" },
+  409: { "message":"Email is already registered", "color": "text-red-error" },
   500: { "message":"Server is not responding", "color": "text-red-error" },
 };
 
@@ -44,4 +45,7 @@ export const socials = [
   },
 ];
 
-export const baseUrl = "https://fleet-manager-backend.onrender.com/api/v1";
+// export const baseUrl = "https://fleet-manager-backend.onrender.com/api/v1";
+
+// Use below for testing
+export const baseUrl = "http://localhost:3100/api/v1";

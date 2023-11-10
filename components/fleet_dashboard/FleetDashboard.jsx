@@ -6,7 +6,9 @@ import { useFleetData } from '../../state/useFleetData';
 const FleetDashboard = () => {
   const { fleetData, addFleet, error } = useFleetData();
   const [snackbarMessage, setSnackbarMessage] = useState(null);
-
+  
+  console.log(error);
+  console.log(fleetData);
   useEffect(() => {
     if (error) {
       setSnackbarMessage(error);
@@ -20,7 +22,7 @@ const FleetDashboard = () => {
       setSnackbarMessage(storedSnackbarMessage);
       setTimeout(() => {
         closeSnackbar();
-      }, 5000);
+      }, 10000);
     }
   }, []);
 

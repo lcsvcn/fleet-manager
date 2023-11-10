@@ -7,7 +7,6 @@ const Modal = ({title, addItem, options, modal, setModal}) => {
     const [data, setData] = useState({});
 
     const handleSubmit = () => {
-        console.log(data);
         addItem(data);
     }
 

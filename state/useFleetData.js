@@ -8,7 +8,8 @@ export function useFleetData() {
   useEffect(() => {
     fetch(`${baseUrl}/fleets`)
       .then((response) => {
-        if (!response.ok) {
+        if (response.status >= 300) {
+          setError(`Error getting all fleet data: (Status: ${response.status})`);
           throw new Error(`Network response was not ok (Status: ${response.status})`);
         }
         return response.json();
@@ -22,34 +23,33 @@ export function useFleetData() {
       });
   }, []);
 
-  const addFleet = (newFleet) => {
+  const addFleet = async (newFleet) => {
     const owner_email = localStorage.getItem("client_email");
+    
+    if (owner_email) {
+      newFleet.owner_email = owner_email;
+    }
 
-    newFleet.owner_email = owner_email;
-
-    fetch(`${baseUrl}/fleets`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      },
-      body: JSON.stringify(newFleet),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error adding fleet (Status: ${response.status})`);
-        }
-        return response.json();
+    try {
+      fetch(`${baseUrl}/fleets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFleet),
       })
-      .then((data) => {
-        setFleetData([...fleetData, data]);
-      })
-      .catch((error) => {
+        .then((response) => {
+          if (response.status >= 300) {
+            setError(`Error adding fleet (Status: ${response.status})`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setFleetData([...fleetData, data]);
+        })
+    } catch(error) {
         setError(error.message);
-        console.error('Error adding fleet:', error);
-      });
+      }
   };
 
   return { fleetData, addFleet, error };

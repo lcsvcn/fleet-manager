@@ -4,7 +4,8 @@ import styles from '../../styles';
 import { slideIn, staggerContainer } from '../../utils/motion';
 import { StatusCodeLoginMessages, StatusCodeRecoveryMessages, StatusCodeRegisterMessages, LoginFormTypes } from '../../constants';
 import { isValidEmail } from '../../utils/validations';
-import {baseUrl} from '../../constants';
+import { baseUrl } from '../../constants';
+
 const Login = () => {
   const [formType, setFormType] = useState(LoginFormTypes.LOGIN);
   const [email, setEmail] = useState('');
@@ -16,11 +17,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    var response = {};
+    var response;
     
     if (formType === LoginFormTypes.REGISTER) {
       try {
-        const registerResponse = await fetch(`${baseUrl}/clients`, {
+        response = await fetch(`${baseUrl}/clients`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,16 +34,13 @@ const Login = () => {
           }),
         });
 
-        console.log('registerResponse', registerResponse);
-  
-        response = { status: registerResponse.status };
       } catch (error) {
         console.error('Error during registration API call:', error);
-        response = { status: 500 }; // Internal server error
+        response = { status: 500 };
       }
-      console.log('response status', response.status)
+
       setError(StatusCodeRegisterMessages[response.status]);
-    } else if(formType === LoginFormTypes.LOGIN) {
+    } else if (formType === LoginFormTypes.LOGIN) {
       try {
         const loginResponse = await fetch(`${baseUrl}/login`, {
           method: 'POST',
@@ -59,9 +57,10 @@ const Login = () => {
         response = { status: 500 }; // Internal server error
       }
     
+      console.log(StatusCodeLoginMessages[response.status]);
       setError(StatusCodeLoginMessages[response.status]);
 
-      if (response.status == 200) {
+      if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("client_email", email);
         setTimeout(() => {
           window.location.replace('/dashboard');
