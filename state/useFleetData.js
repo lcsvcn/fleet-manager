@@ -6,7 +6,11 @@ export function useFleetData() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${baseUrl}/fleets`)
+    fetch(`${baseUrl}/fleets`, {
+      headers: {
+        'owner_email': localStorage.getItem('client_email'),
+      },
+    })
       .then((response) => {
         if (response.status >= 300) {
           setError(`Error getting all fleet data: (Status: ${response.status})`);
@@ -24,13 +28,10 @@ export function useFleetData() {
   }, []);
 
   const addFleet = async (newFleet) => {
-    const owner_email = localStorage.getItem("client_email");
-    
-    if (owner_email) {
-      newFleet.owner_email = owner_email;
-    }
-
     try {
+      const owner_email = localStorage.getItem('client_email');
+      newFleet.owner_email = owner_email;
+
       fetch(`${baseUrl}/fleets`, {
         method: 'POST',
         headers: {
@@ -46,8 +47,8 @@ export function useFleetData() {
         })
         .then((data) => {
           setFleetData([...fleetData, data]);
-        })
-    } catch(error) {
+        });
+    } catch (error) {
       setError(error.message);
       console.log(error.message);
     }

@@ -6,7 +6,13 @@ export function useDroneData(id) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${baseUrl}/fleet/${id}/drones`)
+    const owner_email = localStorage.getItem('client_email');
+
+    fetch(`${baseUrl}/fleet/${id}/drones`, {
+      headers: {
+        'owner_email': owner_email,
+      },
+    })
       .then((response) => {
         if (response.status >= 300) {
           setError(`Error getting all drone data: (Status: ${response.status})`);
@@ -20,14 +26,18 @@ export function useDroneData(id) {
       .catch((error) => {
         setError(error.message);
       });
-  }, []);
+  }, [id]);
 
   const addDrone = async (newDrone) => {
     try {
+      const owner_email = localStorage.getItem('client_email');
+      newDrone.owner_email = owner_email;
+
       fetch(`${baseUrl}/fleet/${id}/drones`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'owner_email': owner_email,
         },
         body: JSON.stringify(newDrone),
       })
@@ -39,8 +49,8 @@ export function useDroneData(id) {
         })
         .then((data) => {
           setDroneData([...droneData, data]);
-        })
-    }  catch (error) {
+        });
+    } catch (error) {
       setError(error.message);
       console.log(error.message);
     }
