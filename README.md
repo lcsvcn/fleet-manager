@@ -1,3 +1,7 @@
+# Assessment Overview
+
+https://docs.google.com/document/d/1yHU9K4LfDcPN-GfYdeuYOiC0UxtRbB_Nj04wZVxDShk/edit?usp=sharing
+
 # Fleet Manager Customer Portal
 
 Welcome to the Fleet Manager Customer Portal! This web application allows users to efficiently manage and monitor their fleet of vehicles.
